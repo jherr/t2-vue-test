@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-container
+      fluid
+      grid-list-lg
+    >
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex xs12>
+          <v-slider
+            v-model="slider"
+            min="0"
+            max="180"
+          ></v-slider>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: 'App',
+  computed: {
+    slider: {
+      get() {
+        return this.$store.state.position;
+      },
+      set(val) {
+        this.$store.dispatch('setPosition', val);
+      }
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
